@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 
 // 1. Use mongoose to establish a connection to MongoDB
 mongoose.connect('mongodb://localhost/glossary', function(error){
-  if(error) console.log(error);
-
-      console.log("Connection Successful!");
+  if (error) { console.log(error) };
+  
+  console.log("Connection Successful!");
 });
 
 // 2. Set up any schema and models needed by the app
@@ -15,7 +15,7 @@ let glossarySchema = mongoose.Schema({
   definition: String
 })
 
-let Word = mongoose.model('Word', glossarySchema);
+let Word = mongoose.model('Word', glossarySchemashow );
 
 let save = (word) => {
   var newWord = new Word(word);
