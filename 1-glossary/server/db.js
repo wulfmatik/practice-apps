@@ -15,7 +15,7 @@ let glossarySchema = mongoose.Schema({
   definition: String
 })
 
-let Word = mongoose.model('Word', glossarySchemashow );
+let Word = mongoose.model('Word', glossarySchema);
 
 let save = (word) => {
   var newWord = new Word(word);
