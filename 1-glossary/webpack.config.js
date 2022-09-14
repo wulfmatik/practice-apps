@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 /*
   What should go here?  Great question!
 
@@ -12,12 +13,13 @@ const path = require("path");
 */
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: path.join(__dirname, "/client/src/index.jsx"),
   output: {
     path: path.join(__dirname, "/client/dist"),
     filename: "bundle.js",
   },
+  devtool: "source-map",
   module: {
     rules: [
       {

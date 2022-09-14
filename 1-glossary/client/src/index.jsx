@@ -1,9 +1,11 @@
-import react from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import GlossaryList from './components/GlossaryList.jsx';
+import Search from './components/Search.jsx';
+import AddWord from './components/AddWord.jsx';
 
-class App extends React.component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,8 +18,10 @@ class App extends React.component {
   }
 
   render() {
-
+    return (<div>
+      <h1>Hello There</h1>
+    </div>)
   }
 };
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('root'));

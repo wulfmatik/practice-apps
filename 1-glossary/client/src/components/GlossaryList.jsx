@@ -1,6 +1,6 @@
-import react from 'react';
+import React from 'react';
 
-class GlossaryList extends React.component {
+class GlossaryList extends React.Component {
 
 };
 

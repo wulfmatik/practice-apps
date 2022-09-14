@@ -1,6 +1,6 @@
-import react from 'react';
+import React from 'react';
 
-class Search extends React.component {
+class Search extends React.Component {
 
 };
 
