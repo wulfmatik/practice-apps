@@ -14,7 +14,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-
+   return axios.get('http://localhost:3000/glossary')
+     .then((response) => {
+      console.log(response);
+     })
   }
 
   render() {
