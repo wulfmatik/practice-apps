@@ -17,7 +17,7 @@ app.post('/glossary', (req, res) => {
 });
 
 app.get('/glossary', (req, res) => {
-  db.Word.find({})
+  db.Word.find({word: req.body.word})
     .then((data) => {
       res.send(data);
     })

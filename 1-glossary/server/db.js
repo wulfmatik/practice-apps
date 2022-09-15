@@ -15,17 +15,11 @@ let glossarySchema = mongoose.Schema({
   id: Number,
   word: String,
   definition: String
-})
-var collectionName = 'Word';
+});
+
+let collectionName = 'Word';
 let Word = mongoose.model('Word', glossarySchema, collectionName);
 
-// let save = (word) => {
-//   var newWord = new Word(word);
-//   return newWord.save()
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// }
 // 3. Export the models
 module.exports.Word = Word;
 //module.exports.save = save;

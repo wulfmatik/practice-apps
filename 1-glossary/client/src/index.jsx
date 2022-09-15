@@ -3,18 +3,26 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import GlossaryList from './components/GlossaryList.jsx';
 import Search from './components/Search.jsx';
-import AddWord from './components/AddWord.jsx';
+import WordEntry from './components/WordEntry.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      glossary: []
+      glossary: [{
+        word: 'cat',
+        definition: 'feline',
+      
+      },
+      { word: 'dog',
+        definition: 'best friend'
+      }  
+      ]
     }
   }
 
   componentDidMount() {
-   return axios.get('http://localhost:3000/glossary')
+   axios.get('http://localhost:3000/glossary')
      .then((response) => {
       console.log(response);
      })
@@ -22,7 +30,10 @@ class App extends React.Component {
 
   render() {
     return (<div>
-      <h1>Hello There</h1>
+      <h1>Glossary App</h1>
+      <WordEntry />
+      <Search />
+      <GlossaryList glossary={this.state.glossary}/>
     </div>)
   }
 };
