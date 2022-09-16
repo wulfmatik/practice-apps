@@ -1,15 +1,13 @@
 import React from 'react';
-import Search from './Search.jsx';
+import GlossaryItem from './GlossaryItem.jsx';
 
 const GlossaryList = (props) => (
   <div>
-    <h4>Glossary List</h4>
+    <h4 style={{'textDecoration': 'underline'}}>Glossary List</h4>
     <ul>
       {props.glossary.map((entry, index) => (
         <div key={index}>
-        <li>{entry.word} : {entry.definition}</li>
-        <button>Edit</button>
-        <button>Delete</button>
+        <GlossaryItem entry={entry} item={index} delete={props.delete} edit={props.edit}/>
         </div>
       ))}
     </ul>
