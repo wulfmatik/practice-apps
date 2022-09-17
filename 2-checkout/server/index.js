@@ -21,7 +21,13 @@ app.use(logger);
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get('/checkout', (req, res) => {
-  res.send('hello');
+  db.query(`select * from users where name='${req.query.name}'`, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  })
 });
 
 app.post('/checkout', (req, res) => {
