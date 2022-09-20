@@ -4,8 +4,8 @@ class Address extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      line1: '',
-      line2: '',
+      addressLine1: '',
+      addressLine2: '',
       city: '',
       usState: '',
       zipCode: '',

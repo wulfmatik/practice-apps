@@ -10,12 +10,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentView: '',
-      accountData: {}
+      accountData: {},
+      paymentData: {}
     }
     this.initializeCheckout = this.initializeCheckout.bind(this);
     this.confirmationSwitch = this.confirmationSwitch.bind(this);
     this.accountDataHandler = this.accountDataHandler.bind(this);
     this.addressDataHandler = this.addressDataHandler.bind(this);
+    this.paymentDataHandler = this.paymentDataHandler.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +40,11 @@ class App extends React.Component {
     this.setState({addressData: data, currentView: 'payment'});
   }
 
+  paymentDataHandler(data) {
+    this.setState({paymentData: data, currentView: 'confirmation'});
+  }
+
+
   render() {
     console.log(this.state);
     return (
@@ -45,7 +52,7 @@ class App extends React.Component {
         <h1>Checkout App</h1>
         {this.state.currentView === 'home' &&
           <div>  
-          <h2>Click Checkout Button</h2>  
+          <h2>Click!</h2>  
           <button onClick={this.initializeCheckout}>Checkout</button>
           </div>}
         {this.state.currentView === 'account' && 
@@ -58,7 +65,11 @@ class App extends React.Component {
           </div>}
         {this.state.currentView === 'payment' && 
           <div>
-            <Confirmation update={this.confirmationSwitch} />
+            <Payment onSubmit={this.paymentDataHandler} />
+          </div>}  
+        {this.state.currentView === 'confirmation' && 
+          <div>
+            <Confirmation update={this.confirmDataHandler} />
           </div>}
       </div>
     )
@@ -66,10 +77,3 @@ class App extends React.Component {
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));
-
-// return (<div>
-//   <p>Hello, World!</p>
-//   <p>
-//     <code>Page Cookie: {JSON.stringify(document.cookie, undefined, "\t")}</code>
-//   </p>
-// </div>)
