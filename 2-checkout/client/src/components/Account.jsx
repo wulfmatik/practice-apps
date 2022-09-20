@@ -8,20 +8,16 @@ class Account extends React.Component {
       email: '',
       password: ''
     }
+    this.array = [];
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    if (event.target.name === 'name') {
-      this.setState({name: event.target.value});
-    }
-    if (event.target.name === 'email') {
-      this.setState({email: event.target.value});
-    }
-    if (event.target.name === 'password') {
-      this.setState({password: event.target.value});
-    }
+    const name = event.target.name;
+    const value = event.target.value;
+
+    this.setState({[name]: value});
   }
 
   handleSubmit(event) {
