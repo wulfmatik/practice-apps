@@ -9,49 +9,52 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: ''
+      currentView: '',
+      accountData: {}
     }
-    this.accountSwitch = this.accountSwitch.bind(this);
-    this.addressSwitch = this.addressSwitch.bind(this);
-    this.paymentSwitch = this.paymentSwitch.bind(this);
+    this.initializeCheckout = this.initializeCheckout.bind(this);
     this.confirmationSwitch = this.confirmationSwitch.bind(this);
+    this.accountDataHandler = this.accountDataHandler.bind(this);
+    this.addressDataHandler = this.addressDataHandler.bind(this);
   }
 
   componentDidMount() {
     this.setState({currentView: 'home'});
   }
 
-  accountSwitch() {
+  initializeCheckout() {
     this.setState({currentView: 'account'});
-  }
-
-  addressSwitch() {
-    this.setState({currentView: 'address'})
-  }
-
-  paymentSwitch() {
-    this.setState({currentView: 'payment'});
   }
 
   confirmationSwitch() {
     this.setState({currentView: 'home'});
   }
 
+  accountDataHandler(data) {
+    this.setState({accountData: data, currentView: 'address'});
+  }
+
+  addressDataHandler(data) {
+    this.setState({addressData: data, currentView: 'payment'});
+  }
+
   render() {
     console.log(this.state);
     return (
       <div>
+        <h1>Checkout App</h1>
         {this.state.currentView === 'home' &&
           <div>  
-          <button onClick={this.accountSwitch}>Checkout</button>
+          <h2>Click Checkout Button</h2>  
+          <button onClick={this.initializeCheckout}>Checkout</button>
           </div>}
         {this.state.currentView === 'account' && 
           <div>
-          <Account update={this.addressSwitch} />
+          <Account onSubmit={this.accountDataHandler} />
           </div>}
         {this.state.currentView === 'address' && 
           <div>
-            <Address update={this.paymentSwitch} />
+            <Address onSubmit={this.addressDataHandler} />
           </div>}
         {this.state.currentView === 'payment' && 
           <div>
