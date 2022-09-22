@@ -9,7 +9,7 @@ const mysql = require("mysql2")
 const db = require("./db");
 
 const app = express();
-
+app.use(express.json());
 // Adds `req.session_id` based on the incoming cookie value.
 // Generates a new session if one does not exist.
 app.use(sessionHandler);
@@ -31,7 +31,8 @@ app.get('/checkout', (req, res) => {
 });
 
 app.post('/checkout', (req, res) => {
-  var values = [req.query.name, req.query.email, req.query.password, req.query.address, req.query.phone, req.query.creditCard, req.query.expiry, req.query.ccv, req.query.billingZip];
+  console.log(req);
+  var values = [req.body.name, req.body.email, req.body.password, req.body.address, req.body.phone, req.body.creditCard, req.body.expiry, req.body.ccv, req.body.billingZip];
 
   db.query('insert into users (name, email, password, address, phone, creditCard, expiry, ccv, billingZip) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', values, (err) => {
     if (err) {

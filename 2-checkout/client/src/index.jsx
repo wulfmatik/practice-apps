@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
+import axios from 'axios';
 import Account from './components/Account.jsx';
 import Address from './components/Address.jsx';
 import Payment from './components/Payment.jsx';
@@ -11,13 +12,14 @@ class App extends React.Component {
     this.state = {
       currentView: '',
       accountData: {},
+      addressData: {},
       paymentData: {}
     }
     this.initializeCheckout = this.initializeCheckout.bind(this);
-    this.confirmationSwitch = this.confirmationSwitch.bind(this);
     this.accountDataHandler = this.accountDataHandler.bind(this);
     this.addressDataHandler = this.addressDataHandler.bind(this);
     this.paymentDataHandler = this.paymentDataHandler.bind(this);
+    this.saveDetails = this.saveDetails.bind(this);
   }
 
   componentDidMount() {
@@ -26,10 +28,6 @@ class App extends React.Component {
 
   initializeCheckout() {
     this.setState({currentView: 'account'});
-  }
-
-  confirmationSwitch() {
-    this.setState({currentView: 'home'});
   }
 
   accountDataHandler(data) {
@@ -44,6 +42,27 @@ class App extends React.Component {
     this.setState({paymentData: data, currentView: 'confirmation'});
   }
 
+  confirmDataHandler(data) {
+    this.saveDetails();
+    this.setState({currentView: 'home'});
+  }
+
+  saveDetails() {
+    var address = {address: Object.values(this.state.addressData).join(',')};
+
+    var completeData = Object.assign(this.state.accountData, address, this.state.paymentData)
+    console.log('completeData: ', completeData);
+    axios.post('/checkout', completeData)
+      .then((response) => {
+        console.log(response);
+        this.setState({currentView: 'home', accountData: {}, addressData: {}, paymentData: {}});
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+  }
+
 
   render() {
     console.log(this.state);
@@ -52,7 +71,7 @@ class App extends React.Component {
         <h1>Checkout App</h1>
         {this.state.currentView === 'home' &&
           <div>  
-          <h2>Click!</h2>  
+          <h4>Click!</h4>  
           <button onClick={this.initializeCheckout}>Checkout</button>
           </div>}
         {this.state.currentView === 'account' && 
@@ -69,7 +88,7 @@ class App extends React.Component {
           </div>}  
         {this.state.currentView === 'confirmation' && 
           <div>
-            <Confirmation update={this.confirmDataHandler} />
+            <Confirmation onSubmit={this.saveDetails} data={this.state}/>
           </div>}
       </div>
     )
