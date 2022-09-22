@@ -42,16 +42,10 @@ class App extends React.Component {
     this.setState({paymentData: data, currentView: 'confirmation'});
   }
 
-  confirmDataHandler(data) {
-    this.saveDetails();
-    this.setState({currentView: 'home'});
-  }
-
   saveDetails() {
     var address = {address: Object.values(this.state.addressData).join(',')};
+    var completeData = Object.assign(this.state.accountData, address, this.state.paymentData);
 
-    var completeData = Object.assign(this.state.accountData, address, this.state.paymentData)
-    console.log('completeData: ', completeData);
     axios.post('/checkout', completeData)
       .then((response) => {
         console.log(response);
