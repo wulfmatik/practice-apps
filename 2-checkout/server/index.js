@@ -31,10 +31,9 @@ app.get('/checkout', (req, res) => {
 });
 
 app.post('/checkout', (req, res) => {
-  console.log(req);
-  var values = [req.body.name, req.body.email, req.body.password, req.body.address, req.body.phone, req.body.creditCard, req.body.expiry, req.body.ccv, req.body.billingZip];
+  var values = [req.session_id, req.body.name, req.body.email, req.body.password, req.body.address, req.body.phone, req.body.creditCard, req.body.expiry, req.body.ccv, req.body.billingZip];
 
-  db.query('insert into users (name, email, password, address, phone, creditCard, expiry, ccv, billingZip) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', values, (err) => {
+  db.query('insert into users (sessionID, name, email, password, address, phone, creditCard, expiry, ccv, billingZip) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', values, (err) => {
     if (err) {
       res.send(err);
     } else {

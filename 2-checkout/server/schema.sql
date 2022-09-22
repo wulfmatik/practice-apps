@@ -4,7 +4,7 @@ USE checkout;
 
 CREATE TABLE users (
   id integer auto_increment,
-  sessionID integer,
+  sessionID char(255),
   name char(255),
   email char(255),
   password char(255),
